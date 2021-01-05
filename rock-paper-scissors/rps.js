@@ -1,48 +1,67 @@
-const options = ['rock', 'paper', 'scissors'];
-
 let playerScore = 0;
 let computerScore = 0;
+let playerSelection;
+let computerSelection;
+
+const options = ['rock', 'paper', 'scissors'];
 
 function computerPlay() {
-  selection = options[Math.floor(Math.random() * 3)];
-  return selection;
+  return options[Math.floor(Math.random() * 3)];
 }
+
+function playerPlay() {
+  playerSelection = this.textContent.toLowerCase();
+  game();
+}
+
+const selections = document.querySelectorAll('.selection');
+
+selections.forEach((selection) => {
+  selection.addEventListener('click', playerPlay);
+});
+
+const scoreboard = document.querySelector('.scoreboard');
+const gameMessage = document.createElement('p');
+gameMessage.style.whiteSpace = 'pre-line';
+const scoreMessage = document.createElement('p');
+scoreMessage.style.whiteSpace = 'pre-line';
+const winnerMessage = document.createElement('p');
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
-    console.log(`Both players picked ${playerSelection}!`);
-    console.log("It's a draw! On to the next round!");
+    gameMessage.textContent = `Both players picked ${playerSelection}!\nIt's a draw!\nOn to the next round!`;
+    scoreboard.appendChild(gameMessage);
   } else if (
     (playerSelection === 'rock' && computerSelection === 'scissors') ||
     (playerSelection === 'paper' && computerSelection === 'rock') ||
     (playerSelection === 'scissors' && computerSelection === 'paper')
   ) {
     playerScore++;
-    console.log(`You played ${playerSelection} and Computer played ${computerSelection}!`);
-    console.log('You win! Congratulations! On to the next round!');
+    gameMessage.textContent = `You played ${playerSelection} and Computer played ${computerSelection}!\nYou win!\nAwesome! You got this!`;
+    scoreboard.appendChild(gameMessage);
   } else {
     computerScore++;
-    console.log(`You played ${playerSelection} and Computer played ${computerSelection}!`);
-    console.log('You lost... Better luck next round!');
+    gameMessage.textContent = `You played ${playerSelection} and Computer played ${computerSelection}!\nYou lose...\nBetter luck next time!`;
+    scoreboard.appendChild(gameMessage);
   }
 }
 
 function game() {
-  let playerSelection;
-  let computerSelection;
+  winnerMessage.textContent = '';
+  computerSelection = computerPlay();
+  playRound(playerSelection, computerSelection);
+  scoreMessage.textContent = `Game Score:\nPlayer: ${playerScore}\nComputer: ${computerScore}`;
+  scoreboard.appendChild(scoreMessage);
 
-  while (playerScore < 5 && computerScore < 5) {
-    playerSelection = prompt('Pick rock, paper or scissors!').toLowerCase();
-    computerSelection = computerPlay();
-    playRound(playerSelection, computerSelection);
-    console.log('Current Score:');
-    console.log(`Player: ${playerScore}`);
-    console.log(`Computer: ${computerScore}`);
-  }
-
-  if (playerScore > computerScore) {
-    console.log('Congratulations! You have defeated the Computer!');
-  } else {
-    console.log('What a shame, you lost!');
+  if (playerScore === 5 || computerScore === 5) {
+    if (playerScore > computerScore) {
+      winnerMessage.textContent = 'Congratulations! You have defeated the Computer!';
+      scoreboard.appendChild(winnerMessage);
+    } else {
+      winnerMessage.textContent = 'What a shame, you lost!';
+      scoreboard.appendChild(winnerMessage);
+    }
+    playerScore = 0;
+    computerScore = 0;
   }
 }
