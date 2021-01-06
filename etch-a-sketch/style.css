@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+main {
+  display: grid;
+  width: clamp(320px, 70vw, 960px);
+  height: clamp(320px, 70vw, 960px);
+  border: 5px solid black;
+}
+
+div {
+  background-color: white;
+}
