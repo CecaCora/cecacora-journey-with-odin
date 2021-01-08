@@ -1,9 +1,99 @@
-@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
+p,
+button {
+  font-family: 'Fira Code', monospace;
+  font-size: clamp(2rem, 3vw, 4rem);
+}
+
 main {
   display: grid;
+  grid-template-areas:
+    'top top top top'
+    'bottom bottom bottom bottom'
+    'seven eight nine divide'
+    'four five six multiply'
+    'one two three subtract'
+    '. zero . add'
+    'ac c equal equal';
+}
+
+.top {
+  grid-area: top;
+}
+
+.bottom {
+  grid-area: bottom;
+}
+
+.one {
+  grid-area: one;
+}
+
+.two {
+  grid-area: two;
+}
+
+.three {
+  grid-area: three;
+}
+
+.four {
+  grid-area: four;
+}
+
+.five {
+  grid-area: five;
+}
+
+.six {
+  grid-area: six;
+}
+
+.seven {
+  grid-area: seven;
+}
+
+.eight {
+  grid-area: eight;
+}
+
+.nine {
+  grid-area: nine;
+}
+
+.zero {
+  grid-area: zero;
+}
+
+.add {
+  grid-area: add;
+}
+
+.subtract {
+  grid-area: subtract;
+}
+
+.multiply {
+  grid-area: multiply;
+}
+
+.divide {
+  grid-area: divide;
+}
+
+.equal {
+  grid-area: equal;
+}
+
+.c {
+  grid-area: c;
+}
+
+.ac {
+  grid-area: ac;
 }

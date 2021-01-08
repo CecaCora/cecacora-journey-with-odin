@@ -73,7 +73,7 @@ const operate = (num1, operator, num2) => {
       return multiply(num1, num2);
     case '÷':
       if (num2 === 0) {
-        return '(ノಠ益ಠ)ノ彡 ¡0 ʎq ǝpᴉʌᴉp ʇ,uɐɔ I';
+        return "(ノಠ益ಠ)ノ彡 I can't divide by zero!";
       }
       return divide(num1, num2);
     case '+':
@@ -101,11 +101,15 @@ const evaluate = () => {
   }
 
   let result = evalEquation[0];
+
+  if (isNaN(result)) {
+    return result;
+  }
   if (result % 1 !== 0) {
     result = parseFloat(result).toFixed(3);
   }
-  if (result.match(/^[\d]+[\.][\d]+e\+[\d]+$/)) {
-    result = '(ノಥ,_｣ಥ)ノ彡 ¡ǝlpuɐɥ oʇ ƃᴉq ooʇ s,ʇI';
+  if (result.match(/^-?\d+\.\d+e\+\d+$/)) {
+    result = "(ノಥ,_｣ಥ)ノ彡 I can't handle this!";
   }
 
   return result;
