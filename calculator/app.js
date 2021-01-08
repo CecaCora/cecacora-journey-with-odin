@@ -1,44 +1,65 @@
-// Global calculator state here
-const calculatorState = {
-  displayedEquation: [], // for calc top line view
-  displayedValue: [], // for calc bottom line view
-  userInput: [], // push displayedValue and operators to this array on operator clicks
-  hasDecimal: false, // toggle when displayedValue has decimal
+// Calculator state
+
+// Visual variables - what's visual should be strings
+let topView = '';
+let bottomView = '';
+
+// Logic variables - what's working behind the scenes
+let equation = [];
+let input = '';
+
+const updateView = () => {
+  topView = equation.join('');
+  bottomView = input;
+  document.querySelector('.top').innerText = `${topView}`;
+  document.querySelector('.bottom').innerText = `${bottomView}`;
 };
 
-// Event listeners
+// Event listeners for digits
 const digits = document.querySelectorAll('.digit');
 digits.forEach((digit) => {
   digit.addEventListener('click', (e) => {
-    calculatorState.displayedValue.push(e.target.innerText);
-    console.log(calculatorState.displayedValue);
+    input += e.target.innerText;
+    updateView();
   });
 });
 
+// Event listeners for operators
 const operators = document.querySelectorAll('.operator');
 operators.forEach((operator) => {
   operator.addEventListener('click', (e) => {
-    if (calculatorState.displayedValue.length > 0) {
-      let value = calculatorState.displayedValue.join('');
-      calculatorState.userInput.push(value, e.target.innerText);
-      console.log(calculatorState.userInput);
-      calculatorState.displayedValue = [];
+    if (input) {
+      equation.push(input, e.target.innerText);
+      input = '';
     }
+    if (equation[equation.length - 1]?.match(/[×÷+−]/)) {
+      equation.splice(-1, 1, e.target.innerText);
+    }
+    updateView();
   });
 });
 
-const equal = document.querySelector('.equal');
-equal.addEventListener('click', () => {
-  if (calculatorState.userInput.length <= 1) {
-    return 'TODO: set displayedValue to first item of user input if any';
-  } else {
-    let value = calculatorState.displayedValue.join('');
-    calculatorState.userInput.push(value);
-    calculatorState.displayedValue = evaluate();
-  }
+// Equal event listener
+document.querySelector('.equal').addEventListener('click', () => {
+  equation.push(input);
+  input = evaluate();
+  updateView();
+  equation = [];
 });
 
-// Define operations here
+// Clear one
+document.querySelector('.c').addEventListener('click', () => {
+  input = input.slice(0, -1);
+  updateView();
+});
+
+// All clear
+document.querySelector('.ac').addEventListener('click', () => {
+  [topView, bottomView, equation, input] = ['', '', [], ''];
+  updateView();
+});
+
+// Calculator functions
 const add = (x, y) => x + y;
 const subtract = (x, y) => x - y;
 const multiply = (x, y) => x * y;
@@ -51,6 +72,9 @@ const operate = (num1, operator, num2) => {
     case '×':
       return multiply(num1, num2);
     case '÷':
+      if (num2 === 0) {
+        return '(ノಠ益ಠ)ノ彡 ¡0 ʎq ǝpᴉʌᴉp ʇ,uɐɔ I';
+      }
       return divide(num1, num2);
     case '+':
       return add(num1, num2);
@@ -60,26 +84,29 @@ const operate = (num1, operator, num2) => {
 };
 
 const evaluate = () => {
-  let input = calculatorState.userInput;
-  let display = calculatorState.displayedEquation;
+  let evalEquation = [...equation];
 
-  display = [...input].join(' ');
-
-  while (input.includes('×') || input.includes('÷')) {
-    let opIndex = input.findIndex((item) => item.match(/[×÷]/));
-    let evalSegment = input.splice(opIndex - 1, 3);
-    let evalSegmentResult = operate(...evalSegment).toString();
-    input.splice(opIndex - 1, 0, evalSegmentResult);
+  while (evalEquation.includes('×') || evalEquation.includes('÷')) {
+    let opIndex = evalEquation.findIndex((item) => item.match(/[×÷]/));
+    let segment = evalEquation.splice(opIndex - 1, 3);
+    let segmentResult = operate(...segment).toString();
+    evalEquation.splice(opIndex - 1, 0, segmentResult);
   }
 
-  while (input.includes('+') || input.includes('−')) {
-    let opIndex = input.findIndex((item) => item.match(/[+−]/));
-    let evalSegment = input.splice(opIndex - 1, 3);
-    let evalSegmentResult = operate(...evalSegment).toString();
-    input.splice(opIndex - 1, 0, evalSegmentResult);
+  while (evalEquation.includes('+') || evalEquation.includes('−')) {
+    let opIndex = evalEquation.findIndex((item) => item.match(/[+−]/));
+    let segment = evalEquation.splice(opIndex - 1, 3);
+    let segmentResult = operate(...segment).toString();
+    evalEquation.splice(opIndex - 1, 0, segmentResult);
   }
 
-  console.log(display);
-  console.log(input);
-  return input;
+  let result = evalEquation[0];
+  if (result % 1 !== 0) {
+    result = parseFloat(result).toFixed(3);
+  }
+  if (result.match(/^[\d]+[\.][\d]+e\+[\d]+$/)) {
+    result = '(ノಥ,_｣ಥ)ノ彡 ¡ǝlpuɐɥ oʇ ƃᴉq ooʇ s,ʇI';
+  }
+
+  return result;
 };
