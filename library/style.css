@@ -1,0 +1,13 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+form {
+  display: flex;
+}
+
+input[type='number'] {
+  appearance: textfield;
+}
