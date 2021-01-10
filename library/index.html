@@ -5,34 +5,199 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../normalize.css" />
     <link rel="stylesheet" href="style.css" />
-    <title>Library</title>
+    <title>Witchary</title>
   </head>
   <body>
-    <h1>Library</h1>
-    <button>New book</button>
-    <form>
-      <label for="title">Title</label>
-      <input type="text" name="title" id="title" />
-      <label for="author">Author</label>
-      <input type="text" name="author" id="author" />
-      <label for="pages">Pages</label>
-      <input type="number" name="pages" id="pages" />
-      <input type="radio" name="readStatus" id="planToRead" value="planToRead" />
-      <label for="planToRead">Plan to read</label>
-      <input type="radio" name="readStatus" id="reading" value="reading" />
-      <label for="reading">Reading</label>
-      <input type="radio" name="readStatus" id="completed" value="completed" />
-      <label for="completed">Completed</label>
-      <button>Add to library</button>
-    </form>
-    <article>
-      <details>
-        <summary>TITLE <span>by AUTHOR</span></summary>
-        <p>PAGES</p>
-        <p>READ STATUS</p>
-        <button>Remove book</button>
-      </details>
-    </article>
+    <header>
+      <section>
+        <h1>Witchary</h1>
+        <p>A witch-crafted virtual library</p>
+      </section>
+      <button>Add a new grimoire to your library!</button>
+      <section class="modal">
+        <form>
+          <p>New Grimoire</p>
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title" />
+          <label for="author">Author</label>
+          <input type="text" name="author" id="author" />
+          <label for="pages">Pages</label>
+          <input type="number" name="pages" id="pages" />
+          <label for="readStatus">Status</label>
+          <select name="readStatus" id="readStatus">
+            <option value="reading">Reading</option>
+            <option value="planning">Plan to read</option>
+            <option value="completed">Completed</option>
+          </select>
+          <button>Add to library</button>
+        </form>
+      </section>
+    </header>
+    <main>
+      <nav>
+        <h2>Grimoires</h2>
+        <a href="#">All</a>
+        <a href="#">Favourites</a>
+        <a href="#">Reading</a>
+        <a href="#">Plan to read</a>
+        <a href="#">Completed</a>
+      </nav>
+      <section>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+        <article>
+          <button>×</button>
+          <h3>TITLE <span>by AUTHOR</span></h3>
+          <p class="pages"><span>N</span> pages</p>
+          <p class="readStatus">READ STATUS</p>
+        </article>
+      </section>
+    </main>
+    <footer>
+      <p>Made with 🍕 without 🍍 by <span>Ceca Cora</span></p>
+    </footer>
     <script src="app.js"></script>
   </body>
 </html>
