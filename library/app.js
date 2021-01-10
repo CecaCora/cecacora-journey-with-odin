@@ -4,7 +4,7 @@ let myLibrary = [
     title: 'Welcome to Witchary! \n \n Use the button above to start adding grimoires!',
     author: 'Ceca Cora',
     pages: 1,
-    readStatus: 'complete',
+    readStatus: 'completed',
   },
   {
     title: 'Side navigation and filters are still being developed! 😳',
