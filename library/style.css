@@ -49,6 +49,12 @@ button {
   border-radius: 0.5em;
 }
 
+button:hover {
+  cursor: pointer;
+  scale: 1.1;
+  transition: scale 0.2s ease-in-out;
+}
+
 header button {
   font-weight: 700;
   color: #930a41;
@@ -86,6 +92,11 @@ a {
   margin-bottom: 0.8em;
 }
 
+a:hover {
+  color: #5de672;
+  scale: 1.1;
+}
+
 main section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -96,13 +107,20 @@ main section {
   max-height: 75vh;
   border-radius: 1em;
   overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+main section::-webkit-scrollbar {
+  display: none;
 }
 
 /* book */
 
 article {
   max-width: 240px;
-  background-color: #9d9ad5;
+  min-height: 320px;
+  background-color: #d5d4ed;
   padding: 0.8em;
   border-radius: 0.5em;
   position: relative;
@@ -113,7 +131,13 @@ article {
   border-bottom: 0.25em solid #930a41;
 }
 
-article button {
+article:hover {
+  scale: 1.02;
+  transition: scale 0.2s ease-in-out;
+}
+
+.remove {
+  display: none;
   position: absolute;
   top: -0.5rem;
   right: -0.5rem;
@@ -164,6 +188,11 @@ footer p {
 }
 
 footer span {
+  color: #ca135c;
+  font-size: 1.1rem;
+}
+
+footer a {
   color: #5de672;
   font-size: 1.25rem;
 }
