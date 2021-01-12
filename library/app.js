@@ -1,7 +1,7 @@
 // library state
 let myLibrary = [
   {
-    title: 'Welcome to Witchary! \n \n Use the button above to start adding grimoires!',
+    title: 'Welcome to Witchary! Use the button above to start adding grimoires!',
     author: 'Ceca Cora',
     pages: 1,
     readStatus: 'completed',
