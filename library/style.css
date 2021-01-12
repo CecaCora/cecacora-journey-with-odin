@@ -47,12 +47,13 @@ button {
   border: none;
   padding: 0.4em 0.6em;
   border-radius: 0.5em;
+  transform: scale(1);
+  transition: transform 0.2s ease-in-out;
 }
 
 button:hover {
   cursor: pointer;
-  scale: 1.1;
-  transition: scale 0.2s ease-in-out;
+  transform: scale(1.1);
 }
 
 header button {
@@ -94,7 +95,7 @@ a {
 
 a:hover {
   color: #5de672;
-  scale: 1.1;
+  transform: scale(1.1);
 }
 
 main section {
@@ -129,11 +130,12 @@ article {
   flex-direction: column;
   border-left: 0.25em solid #403c90;
   border-bottom: 0.25em solid #930a41;
+  transform: scale(1);
+  transition: transform 0.2s ease-in-out;
 }
 
 article:hover {
-  scale: 1.02;
-  transition: scale 0.2s ease-in-out;
+  transform: scale(1.02);
 }
 
 .remove {
