@@ -1,72 +1,70 @@
-const Gameboard = (() => {
-  let boardState = ['', '', '', '', '', '', '', '', ''];
-  const getCellIndex = (cell) => {
-    return parseInt(cell.target.dataset.cell);
-  };
-  const getBoardState = () => {
-    return boardState;
-  };
-  const setBoardState = (playerToken, index) => {
-    boardState[index] = playerToken;
-    document.querySelectorAll(`[data-cell]`)[index].innerText = playerToken;
-  };
-  const resetBoard = () => {
-    boardState = ['', '', '', '', '', '', '', '', ''];
-  };
-  return {
-    getCellIndex,
-    getBoardState,
-    setBoardState,
-    resetBoard,
-  };
-})();
-
-const Player = (inputName, inputToken) => {
-  const name = () => inputName;
-  const token = () => inputToken;
-  const play = (cell) => {
-    let cellIndex = Gameboard.getCellIndex(cell);
-    Gameboard.setBoardState(token(), cellIndex);
-    if (Game.checkWin(allPlays(Gameboard.getBoardState()))) {
-      Game.end();
-    } else {
-      Game.turn++;
-      console.log(Game.turn);
-    }
-  };
-  const allPlays = (boardState) => {
-    let plays = [];
-    for (let i = 0; i < boardState.length; i++) {
-      if (boardState[i] === token()) {
-        plays.push(i);
-      }
-    }
-    return plays;
-  };
-
-  return { name, token, play, allPlays };
-};
-
-const Setup = (() => {
-  const cells = document.querySelectorAll('.gameboard div');
-  cells.forEach((cell) =>
-    cell.addEventListener(
-      'click',
-      (e) => {
-        if (Game.turn % 2 === 0) {
-          Game.playerTwo.play(e);
-        } else {
-          Game.playerOne.play(e);
-        }
-      },
-      {
-        once: true,
-      }
-    )
-  );
-})();
-
 const Game = (() => {
+  //model
+  let isActive = false;
+  let playerOne;
+  let playerTwo;
+  let turn = 1;
+  let board = ['', '', '', '', '', '', '', '', ''];
+  let winner = '';
+
+  return { isActive, playerOne, playerTwo, turn, board, winner };
+})();
+
+const Methods = (() => {
+  //controller
+  const toggleIsActive = () => {
+    Game.isActive = !Game.isActive;
+  };
+
+  const Player = (inputName, inputMarker) => {
+    const getName = () => inputName;
+    const getMarker = () => inputMarker;
+    const makePlay = (cellIndex) => {
+      getBoard()[cellIndex] = getMarker();
+      setCell(cellIndex).innerText = getMarker();
+      updateTurn();
+      if (isWinner()) {
+        setWinner(getName());
+        console.log(getWinner());
+      }
+      if (isDraw()) {
+        console.log('draw');
+      }
+    };
+    const getPlays = () => {
+      let plays = [];
+      for (let i = 0; i < getBoard().length; i++) {
+        if (getBoard()[i] === getMarker()) {
+          plays.push(i);
+        }
+      }
+      return plays;
+    };
+    const isWinner = () => {
+      return winningCellCombinations.some((condition) => {
+        return condition.every((cell) => getPlays().includes(cell));
+      });
+    };
+
+    return { getName, getMarker, makePlay, getPlays, isWinner };
+  };
+
+  const getPlayerOne = () => Game.playerOne;
+
+  const setPlayerOne = (inputName, inputMarker = 'x') => {
+    Game.playerOne = Player(inputName, inputMarker);
+  };
+
+  const getPlayerTwo = () => Game.playerTwo;
+
+  const setPlayerTwo = (inputName, inputMarker = 'o') => {
+    Game.playerTwo = Player(inputName, inputMarker);
+  };
+
+  const getTurn = () => Game.turn;
+
+  const updateTurn = () => Game.turn++;
+
   const winningCellCombinations = [
     [0, 1, 2],
     [3, 4, 5],
@@ -78,27 +76,65 @@ const Game = (() => {
     [2, 4, 6],
   ];
 
-  let playerOne = Player('Ceca', 'x');
-  let playerTwo = Player('CPU', 'o');
+  const getBoard = () => Game.board;
 
-  let turn = 1;
+  const setCell = (cellIndex) => document.querySelectorAll('[data-cell]')[cellIndex];
 
-  const checkWin = (playerPlays) => {
-    return winningCellCombinations.some((condition) => {
-      return condition.every((cell) => playerPlays.includes(cell));
-    });
-  };
-  const checkDraw = () => {
-    if (Gameboard.getBoardState().every((cell) => cell !== '')) {
+  const isFilled = () => getBoard().every((cell) => cell !== '');
+
+  const getWinner = () => Game.winner;
+
+  const setWinner = (name) => (Game.winner = name);
+
+  const isDraw = () => {
+    if (isFilled() && getWinner() === '') {
+      return true;
     }
   };
-  const declareGame = () => {
-    // todo
+
+  const resetBoard = () => (Game.board = ['', '', '', '', '', '', '', '', '']);
+
+  return {
+    toggleIsActive,
+    getPlayerOne,
+    setPlayerOne,
+    getPlayerTwo,
+    setPlayerTwo,
+    getTurn,
+    updateTurn,
+    getBoard,
+    setCell,
+    isDraw,
+    resetBoard,
   };
-  const end = () => {
-    console.log(turn);
-    console.log('END');
+})();
+
+const Display = (() => {
+  //view
+  const registerPlayers = () => {
+    Methods.setPlayerOne(document.querySelector('#p1').value);
+    Methods.setPlayerTwo(document.querySelector('#p2').value);
   };
 
-  return { turn, playerOne, playerTwo, checkWin, end };
+  const playButton = document.querySelector('.play');
+  playButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    registerPlayers();
+    Methods.toggleIsActive();
+  });
+
+  const cells = document.querySelectorAll('[data-cell]');
+  cells.forEach((cell) =>
+    cell.addEventListener(
+      'click',
+      (e) => {
+        if (Methods.getTurn() % 2 === 0) {
+          Methods.getPlayerTwo().makePlay(parseInt(e.target.dataset.cell));
+        } else {
+          Methods.getPlayerOne().makePlay(parseInt(e.target.dataset.cell));
+        }
+      },
+      { once: true }
+    )
+  );
 })();
