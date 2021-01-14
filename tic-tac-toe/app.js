@@ -1,5 +1,4 @@
 const Game = (() => {
-  //model
   let isActive = false;
   let playerOne;
   let playerTwo;
@@ -11,7 +10,6 @@ const Game = (() => {
 })();
 
 const Methods = (() => {
-  //controller
   const toggleIsActive = () => {
     Game.isActive = !Game.isActive;
   };
@@ -110,7 +108,6 @@ const Methods = (() => {
 })();
 
 const Display = (() => {
-  //view
   const registerPlayers = () => {
     Methods.setPlayerOne(document.querySelector('#p1').value);
     Methods.setPlayerTwo(document.querySelector('#p2').value);
