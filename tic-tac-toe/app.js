@@ -12,6 +12,12 @@ const Game = (() => {
 const Methods = (() => {
   const toggleIsActive = () => {
     Game.isActive = !Game.isActive;
+    const gameboard = document.querySelector('.gameboard');
+    if (Game.isActive === false) {
+      gameboard.style.display = 'none';
+    } else {
+      gameboard.style.display = 'grid';
+    }
   };
 
   const Player = (inputName, inputMarker) => {
@@ -23,9 +29,11 @@ const Methods = (() => {
       updateTurn();
       if (isWinner()) {
         setWinner(getName());
+        toggleIsActive();
         console.log(getWinner());
       }
       if (isDraw()) {
+        toggleIsActive();
         console.log('draw');
       }
     };
@@ -50,12 +58,14 @@ const Methods = (() => {
   const getPlayerOne = () => Game.playerOne;
 
   const setPlayerOne = (inputName, inputMarker = 'x') => {
+    inputName === '' ? (inputName = 'Player 1') : inputName;
     Game.playerOne = Player(inputName, inputMarker);
   };
 
   const getPlayerTwo = () => Game.playerTwo;
 
   const setPlayerTwo = (inputName, inputMarker = 'o') => {
+    inputName === '' ? (inputName = 'Player 2') : inputName;
     Game.playerTwo = Player(inputName, inputMarker);
   };
 
@@ -76,7 +86,7 @@ const Methods = (() => {
 
   const getBoard = () => Game.board;
 
-  const setCell = (cellIndex) => document.querySelectorAll('[data-cell]')[cellIndex];
+  const setCell = (cellIndex) => document.querySelectorAll('[data-cell] p')[cellIndex];
 
   const isFilled = () => getBoard().every((cell) => cell !== '');
 
